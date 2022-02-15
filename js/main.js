@@ -1,79 +1,73 @@
-const words = [
-    "Programing",
-    "Space",
-    "School",
-    "Teacher",
-    "Football",
-    "Skills",
-    "Slice",
-    "Mark",
-    "Library",
-    "Circel",
-    "Arrow",
-    "Short",
-    "Smoking",
-    "Hospital",
-    "Example",
-    "like",
-    "Facebook",
-    "Twitter",
-    "Cairo",
-    "Tiktok",
-    "Brother",
-    "Testing",
-    "Family",
-    "Secound",
-    "Browser",
-    "Developer",
-    "Reloading",
-    "Cheese",
-    "Loading",
-    "Problem"
-];
-// const words = []
-// const wordsEz = [
-//   "Tiktok",
-//   "Brother",
-//   "Testing",
-//   "Family",
-//   "Secound",
-//   "Browser",
-//   "Developer",
-//   "Reloading",
-//   "Cheese",
-//   "Loading",
-//   "Problem",
-// ];
-// const wordsNrm = [
-//   "Circel",
-//   "Arrow",
-//   "Short",
-//   "Smoking",
-//   "Hospital",
-//   "Example",
-//   "like",
-//   "Facebook",
-//   "Twitter",
-//   "Cairo",
-// ];
-// const wordsHd = [
-//   "Programing",
-//   "Space",
-//   "School",
-//   "Teacher",
-//   "Football",
-//   "Skills",
-//   "Slice",
-//   "Mark",
-//   "Library",
-// ];
-// Default Level 
 
-// Catch Selectors 
+var words = [];
+var wordsEz = [
+  "Brother",
+  "Short",
+  "Cairo",
+  "Circel",
+  "Like",
+  "Family",
+  "Arrow",
+  "Space",
+  "Slice",
+  "Mark",
+  "Cheese",
+  "School",
+  "Print",
+  "Book",
+  "Egypt",
+  "Mouse",
+  "Italy",
+  "Number",
+  "Data",
+  "Apple",
+  "Forget",
+];
+var wordsNrm = [
+  "Problem",
+  "Tiktok",
+  "Testing",
+  "Loading",
+  "Secound",
+  "Browser",
+  "Smoking",
+  "Example",
+  "Facebook",
+  "Twitter",
+  "Laptop",
+  "Tokyo",
+  "Greece",
+  "Nescafe",
+  "Unknown",
+  "Meating",
+  "Teacher",
+  "Google",
+  "Weather",
+  "Message",
+];
+var wordsHd = [
+  "Developer",
+  "Reloading",
+  "Programing",
+  "Library",
+  "Document",
+  "Barcelona",
+  "Spiderman",
+  "Youtube",
+  "Surprise",
+  "Successful",
+  "Unsuccessful",
+  "Subscribe",
+  "Rewards",
+  "Computer",
+  "Downloads",
+];
+// Default Level
+// Catch Selectors
 let startBtn = document.querySelector(".start");
 let lvlName = document.querySelector(".lvl");
 let lvlSec = document.querySelector(".sec");
-let selectLvl = document.querySelector(".selectLvl") 
+let selectLvl = document.querySelector(".selectLvl");
 let randomWord = document.querySelector(".random-word");
 let input = document.querySelector("input");
 let upComingWords = document.querySelector(".upcoming-words");
@@ -82,34 +76,35 @@ let scoreGot = document.querySelector(".score .got");
 let scoreTotal = document.querySelector(".score .total");
 let finshWord = document.querySelector(".finalResult");
 
+// level of the game
 const lvls = {
-  "Easy": 5,
-  "Normal": 3,
-  "Hard": 2,
+  Easy: 5,
+  Normal: 3,
+  Hard: 2,
 };
 
+// catch select box
 let levels = document.querySelector("select");
 
-    
-// if (levels.value === "Easy") {
-// wordsEz.forEach((e) => {
-//         words.splice(0,0,e)
-//     })
-// } else if (levels.value === "Normal") {
-//         wordsNrm.forEach((e) => {
-//         words.splice(0, 0,e);
-//         });
-// } else {
-//     wordsHd.forEach((e) => {
-//         words.splice(0, 0,e);
-//     });
-// };
+// function to change Array of [Words]
+function wordsLvl() {
+  if (levels.value === "Easy") {
+    words = wordsEz;
+  } else if (levels.value === "Normal") {
+    words = wordsNrm;
+  } else {
+    words = wordsHd;
+  }
+  scoreTotal.innerHTML = words.length;
+}
+wordsLvl();
+
 levels.addEventListener("change", function () {
   changeLvl();
+  wordsLvl();
 });
-    scoreTotal.innerHTML = words.length;
 changeLvl();
-    // function to change levels [Easy, normal, Hard]
+// function to change levels [Easy, normal, Hard]
 function changeLvl() {
   let defaultLvlName = levels.value;
   let defaultLvlSec = lvls[defaultLvlName];
@@ -117,68 +112,67 @@ function changeLvl() {
   lvlSec.innerHTML = defaultLvlSec;
   controlTime.innerHTML = defaultLvlSec;
 }
-// Disable Paste 
-input.onpaste = (() => {
-    return false
-})
-// Start Geme... 
+// Disable Paste
+input.onpaste = () => {
+  return false;
+};
+// Start Geme...
 startBtn.onclick = function () {
-    this.remove()
-    selectLvl.remove();
-    input.focus()
-    randomWords()
+  this.remove();
+  selectLvl.remove();
+  input.focus();
+  randomWords();
 };
-// Random Words 
+// Random Words
 function randomWords() {
-    let randomW = words[Math.floor(Math.random() * words.length)];
-    // remove word 
-    let wordIndex = words.indexOf(randomW);
-    words.splice(wordIndex, 1);
-    // Ranomd Word 
-    randomWord.innerHTML = randomW;
-    // empty upComingWords 
-    upComingWords.innerHTML = "";
-    // upComingWords append 
-    for (i = 0; i < words.length; i++) {
-        let span = document.createElement("span");
-        let spanTxt = document.createTextNode(words[i]);
-        span.appendChild(spanTxt);
-        upComingWords.appendChild(span);
-    }
-    startGame();
-};
+  let randomW = words[Math.floor(Math.random() * words.length)];
+  // remove word
+  let wordIndex = words.indexOf(randomW);
+  words.splice(wordIndex, 1);
+  // Ranomd Word
+  randomWord.innerHTML = randomW;
+  // empty upComingWords
+  upComingWords.innerHTML = "";
+  // upComingWords append
+  for (i = 0; i < words.length; i++) {
+    let span = document.createElement("span");
+    let spanTxt = document.createTextNode(words[i]);
+    span.appendChild(spanTxt);
+    upComingWords.appendChild(span);
+  }
+  startGame();
+}
 // function to creat final Result
 function finalResult(span, txt, cls) {
-    let myspan = document.createElement(span);
-    let spanTxt = document.createTextNode(txt);
-    myspan.className = cls;
-    myspan.appendChild(spanTxt);
-    finshWord.appendChild(myspan);
-    input.remove();
+  let myspan = document.createElement(span);
+  let spanTxt = document.createTextNode(txt);
+  myspan.className = cls;
+  myspan.appendChild(spanTxt);
+  finshWord.appendChild(myspan);
+  input.remove();
 }
-    // function start The playGame  
+// function start The playGame
 function startGame() {
-    changeLvl();
-        let start = setInterval(() => {
-            controlTime.innerHTML--
-            if (controlTime.innerHTML === "0") {
-            clearInterval(start);
-              // compare word
-            if (randomWord.innerHTML.toLowerCase() === input.value.toLowerCase()) {
-                input.value = "";
-                scoreGot.innerHTML++
-                // Recall function 
-                if (words.length > 0) {
-                    randomWords();
-                } else {
-                    finalResult("span", "You'r Greate !", "Successful");
-                }
-                } 
-            else {
-                finalResult("span", "Game Over !", "unSuccessful");
-            }
-            }
-        }, 1000);
-    };
-    
+  changeLvl();
+  let start = setInterval(() => {
+    controlTime.innerHTML--;
+    if (controlTime.innerHTML === "0") {
+      clearInterval(start);
+      // compare word
+      if (randomWord.innerHTML.toLowerCase() === input.value.toLowerCase()) {
+        input.value = "";
+        scoreGot.innerHTML++;
+        // Recall function
+        if (words.length > 0) {
+          randomWords();
+        } else {
+          finalResult("span", "You'r Greate !", "Successful");
+        }
+      } else {
+        finalResult("span", "Game Over !", "unSuccessful");
+      }
+    }
+  }, 1000);
+}
+
 // randomWords()
