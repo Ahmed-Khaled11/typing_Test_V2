@@ -195,5 +195,5 @@ input:focus::placeholder{
     color: red;
 }
 .finalResult .Successful{
-    color:var(--secound-color);
+    color:#009688;
 }
