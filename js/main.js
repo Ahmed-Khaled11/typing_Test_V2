@@ -4,7 +4,7 @@ var wordsEz = [
   "Brother",
   "Short",
   "Cairo",
-  "Circel",
+  "Circle",
   "Like",
   "Family",
   "Arrow",
